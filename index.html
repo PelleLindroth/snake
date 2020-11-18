@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Monoton&family=Press+Start+2P&display=swap"
       rel="stylesheet"
@@ -13,7 +12,9 @@
     <title>Snake</title>
   </head>
   <body>
+
     <div class="wrapper">
+
       <header>
         <h1>SNAKE</h1>
       </header>
@@ -26,13 +27,19 @@
             <p>Arrow keys to turn</p>
           </div>
         </div>
+
         <canvas id="canvas" width="400" height="400">
           Your browser does not support canvas.<br />Please update or change to
           another browser.
         </canvas>
-        <div class="score-container">
-          <p class="score">Score: <span class="current-score">0</span></p>
+
+        <div class="score-speed-container">
+          <p class="score">Score:<span class="current-score">0</span></p>
+          <div class="speed-container">
+            <p class="speed">Speed:<div class="speed-meter"><div class="bar"></div></div></p>
+          </div>
         </div>
+
       </main>
 
       <script src="js/classes/board.js"></script>

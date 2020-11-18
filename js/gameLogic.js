@@ -1,9 +1,13 @@
 const scoreHolder = document.querySelector('.current-score')
 const modal = document.querySelector('.modal')
+const speedBar = document.querySelector('.bar')
 let speed = 10
+let speedBarLength = 2
 let score = 0
+let ringsEaten = 0
+let addition = 1
 let gameOn = false
-let gameOff = true
+let death = true
 let snake, ring, loop
 let board = new Board('#333')
 board.draw()
@@ -19,13 +23,14 @@ const init = () => {
     40,
     380
   )
+
   toggleModal()
   setListeners()
 }
 
 const start = () => {
   score = 0
-  setScore()
+  scoreHolder.innerText = score
   toggleModal()
   gameLoop()
 }
@@ -36,12 +41,12 @@ const toggleModal = () => {
 
 const gameLoop = () => {
   loop = setInterval(() => {
-    drawBoardAndCoin()
-    gameOff = snake.forward()
-    gameOff && endGame()
+    drawBoardAndRing()
+    death = snake.forward()
+    death && endGame()
 
     if (snake.grow && snake.isEven() && speed > 0.2) {
-      setNewCoin()
+      setNewRing()
       setScore()
       increaseSpeed()
     }
@@ -49,7 +54,7 @@ const gameLoop = () => {
   )
 }
 
-const drawBoardAndCoin = () => {
+const drawBoardAndRing = () => {
   board.draw()
   ring.draw()
 }
@@ -58,16 +63,18 @@ const increaseSpeed = () => {
   speed -= 0.1
   speed = Math.floor(speed * 10) / 10
   clearInterval(loop)
+  increaseSpeedBar()
   gameLoop()
 }
 
-const setNewCoin = () => {
-  console.log()
+const setNewRing = () => {
+  ringsEaten++
   let [x, y] = getCoordinates()
 
   for (let piece of snake.pieces) {
     if (x === piece.x && y === piece.y) {
-      setNewCoin()
+      ringsEaten--
+      setNewRing()
     }
   }
 
@@ -84,11 +91,39 @@ const getCoordinates = () => {
   return [x, y]
 }
 
+const setScore = () => {
+  score += addition
+  if (ringsEaten && ringsEaten % 10 === 0) {
+    addition++
+  }
+  scoreHolder.innerText = score
+}
+
+const increaseSpeedBar = () => {
+  speedBarLength += 2
+  if (ringsEaten && ringsEaten % 10 === 0) {
+    speedBar.style.width = `${speedBarLength}px`
+  }
+}
+
 const endGame = () => {
-  modal.querySelector('h2').innerText = 'GAME OVER'
+  showGameOver()
+  speedBarLength = 2
+  ringsEaten = 0
+  speedBar.style.width = `${speedBarLength}px`
   clearInterval(loop)
   snake.draw()
   init()
+}
+
+const showGameOver = () => {
+  modal.querySelector('h2').innerText = 'GAME OVER'
+  let count = 1
+  let blink = setInterval(() => {
+    count % 2 != 0 ? modal.classList.add('hidden') : modal.classList.remove('hidden')
+    count > 11 && clearInterval(blink)
+    count++
+  }, 20)
 }
 
 const setListeners = () => {
@@ -132,10 +167,3 @@ const directionListener = e => {
   }
 }
 
-const setScore = () => {
-  let addition = 10 - Math.floor(speed)
-  if (addition == 0) addition = 1
-
-  score += addition
-  scoreHolder.innerText = score
-}
