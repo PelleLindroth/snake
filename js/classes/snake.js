@@ -102,7 +102,7 @@ class Snake {
   }
 
   isEven = () => {
-    return this.pieces[0].width === 10 && this.pieces[0].height === 10
+    return this.head.width === 10 && this.head.height === 10
   }
 
   checkEat = () => {
@@ -136,9 +136,3 @@ class Snake {
     }
   }
 }
-
-// Implement score
-// Implement Game Over message / Menu
-// Style around canvas
-
-// Snake Invaders...
