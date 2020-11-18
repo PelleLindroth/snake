@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Monoton&family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/styles.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snake</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>SNAKE</h1>
+      </header>
+
+      <main>
+        <div class="modal">
+          <div class="message-box">
+            <h2></h2>
+            <p>SPACE to start</p>
+            <p>Arrow keys to turn</p>
+          </div>
+        </div>
+        <canvas id="canvas" width="400" height="400">
+          Your browser does not support canvas.<br />Please update or change to
+          another browser.
+        </canvas>
+        <div class="score-container">
+          <p class="score">Score: <span class="current-score">0</span></p>
+        </div>
+      </main>
+
+      <script src="js/classes/board.js"></script>
+      <script src="js/classes/ring.js"></script>
+      <script src="js/classes/piece.js"></script>
+      <script src="js/classes/snake.js"></script>
+      <script src="js/gameLogic.js"></script>
+      <script src="js/main.js"></script>
+    </div>
+  </body>
+</html>
