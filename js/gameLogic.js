@@ -7,7 +7,7 @@ let score = 0
 let ringsEaten = 0
 let addition = 1
 let gameOn = false
-let death = true
+let death = false
 let snake, ring, loop
 let board = new Board('#333')
 board.draw()
