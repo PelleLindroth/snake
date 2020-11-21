@@ -30,6 +30,7 @@ const init = () => {
 
 const start = () => {
   score = 0
+  addition = 1
   scoreHolder.innerText = score
   toggleModal()
   gameLoop()
