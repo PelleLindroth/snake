@@ -55,6 +55,10 @@ main {
   left: 0;
 }
 
+.touch-pad {
+  display: none;
+}
+
 .message-box {
   color: #333;
   width: 20rem;
@@ -107,4 +111,100 @@ main {
   left: 2px;
   position: absolute;
   transition: width 1s;
+}
+
+@media screen and (max-width: 650px) {
+  body {
+    background: #90e0d0;
+    overflow: hidden;
+  }
+
+  .wrapper {
+    margin-top: -8rem;
+    padding: 0 0.5rem;
+  }
+
+  header h1 {
+    color: rgba(255, 255, 111, 0.877);
+    font-family: 'Monoton', cursive;
+    font-size: 3rem;
+    margin-bottom: 5px;
+    text-shadow: 0 1px 0 #aaa, 0 2px 0 #a9a9a9, 0 3px 0 #999, 0 4px 0 #979797,
+      0 5px 0 #777, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1),
+      0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2),
+      0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2),
+      0 20px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  #canvas {
+    box-shadow: none;
+    width: 100%;
+    height: 100vw;
+    z-index: 1;
+  }
+
+  .modal {
+    background-color: rgba(255, 255, 255, 0.8);
+    height: 100vw;
+    width: 100%;
+    z-index: 3;
+  }
+
+  .touch-pad {
+    touch-action: manipulation;
+    background: transparent;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    height: 100vw;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+  }
+
+  .up {
+    grid-row: 1;
+    grid-column: 2 / span 6;
+  }
+  .down {
+    grid-row: 8;
+    grid-column: 2 / span 6;
+  }
+
+  .left {
+    grid-row: 2 / span 6;
+    grid-column: 1;
+  }
+
+  .right {
+    grid-row: 2 / span 6;
+    grid-column: 8;
+  }
+
+  .score-speed-container {
+    align-items: baseline;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+  }
+
+  .speed-container {
+    align-items: baseline;
+    display: flex;
+  }
+
+  .speed {
+    display: inline;
+  }
+
+  .speed-meter {
+    border: 1px solid #333;
+    display: inline;
+    height: 12px;
+    min-width: 110px;
+    position: relative;
+  }
 }

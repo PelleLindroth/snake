@@ -1,6 +1,15 @@
 const scoreHolder = document.querySelector('.current-score')
 const modal = document.querySelector('.modal')
+const touchPad = document.querySelector('.touch-pad')
+const upField = document.querySelector('.up')
+const rightField = document.querySelector('.right')
+const downField = document.querySelector('.down')
+const leftField = document.querySelector('.left')
 const speedBar = document.querySelector('.bar')
+const messageBox = document.querySelector('.message-box')
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+  navigator.userAgent
+)
 let speed = 10
 let speedBarLength = 2
 let score = 0
@@ -13,6 +22,7 @@ let board = new Board('#333')
 board.draw()
 
 const init = () => {
+  console.log(isMobile)
   speed = 10
   gameOn = false
   ring = new Ring(100, 100)
@@ -54,6 +64,26 @@ const gameLoop = () => {
   }, speed
   )
 }
+
+const setMessage = () => {
+  let p1, p2
+
+  if (isMobile) {
+    p1 = document.createElement('p')
+    p1.innerHTML = 'TOUCH to start'
+    p2 = document.createElement('p')
+    p2.innerHTML = 'Use board sides to turn'
+  } else {
+    p1 = document.createElement('p')
+    p1.innerHTML = 'SPACE to start'
+    p2 = document.createElement('p')
+    p2.innerHTML = 'Arrow keys to turn'
+  }
+  messageBox.appendChild(p1)
+  messageBox.appendChild(p2)
+}
+
+setMessage()
 
 const drawBoardAndRing = () => {
   board.draw()
@@ -130,6 +160,28 @@ const showGameOver = () => {
 const setListeners = () => {
   window.addEventListener('keydown', startListener)
   window.addEventListener('keydown', directionListener)
+  modal.addEventListener('touchstart', mobileStartListener)
+
+  upField.addEventListener('touchstart', () => {
+    if (snake.direction != 'down') {
+      snake.setDirection('up')
+    }
+  })
+  rightField.addEventListener('touchstart', () => {
+    if (snake.direction != 'left') {
+      snake.setDirection('right')
+    }
+  })
+  downField.addEventListener('touchstart', () => {
+    if (snake.direction != 'up') {
+      snake.setDirection('down')
+    }
+  })
+  leftField.addEventListener('touchstart', () => {
+    if (snake.direction != 'right') {
+      snake.setDirection('left')
+    }
+  })
 }
 
 const startListener = e => {
@@ -139,6 +191,12 @@ const startListener = e => {
     gameOn = true
     start()
   }
+}
+
+const mobileStartListener = e => {
+  if (gameOn) return
+  gameOn = true
+  start()
 }
 
 const directionListener = e => {
