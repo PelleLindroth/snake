@@ -10,7 +10,7 @@ body {
   display: block;
   font-family: 'Source Code Pro', monospace;
   font-size: 0.8rem;
-  overflow: scroll;
+  overflow: hidden;
   box-sizing: border-box;
   height: 100vh;
 }
@@ -35,7 +35,8 @@ h1 {
 }
 
 #canvas {
-  box-shadow: none;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px #333, -1px -1px 5px #333;
   grid-column: 1 / span 2;
   grid-row: 1;
   z-index: 1;
@@ -67,12 +68,14 @@ h1 {
   margin-top: 5px;
   font-size: 1rem;
   font-weight: 500;
+  text-shadow: 1px 1px 6px #a3a3a3;
 }
 
 .score-container {
   display: flex;
   grid-column: 1;
   grid-row: 2;
+  padding-left: 0.5rem;
 }
 
 .speed-container {
@@ -80,29 +83,34 @@ h1 {
   grid-column: 2;
   grid-row: 2;
   justify-content: space-between;
+  padding-right: 0.5rem;
 }
 
 .speed {
-  width: 5.5rem;
+  margin-right: 0.5rem;
 }
 
 .speed-meter {
   border: 1px solid #1a1611;
   display: inline;
+  box-shadow: 1px 1px 3px #333;
   height: 1rem;
   margin-top: 2px;
+  padding: 0 2px;
   position: relative;
   width: 100%;
 }
 
 .bar {
+  align-self: center;
   background-color: #1a1611;
   height: 0.6rem;
+  margin: 0;
   left: 2px;
   position: absolute;
   top: 2px;
   transition: width 1s;
-  width: 1px;
+  width: 0%;
 }
 
 .touch-pad {
@@ -163,10 +171,6 @@ h1 {
 }
 
 @media screen and (min-width: 650px) {
-  body {
-    overflow: hidden;
-  }
-
   .wrapper {
     grid-template-rows: 400px 3rem;
     margin-top: 10rem;

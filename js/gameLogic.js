@@ -13,7 +13,7 @@ let score = 0
 let addition = 1
 let ringsEaten = 0
 let speed = 10
-let speedBarLength = 2
+let speedBarLength = 0
 let gameOn = false
 let death = false
 let snake, ring, loop
@@ -39,6 +39,7 @@ const start = () => {
   score = 0
   addition = 1
   scoreHolder.innerText = score
+  increaseSpeedBar()
   toggleModal()
   gameLoop()
 }
@@ -71,12 +72,10 @@ const setMessage = () => {
 
   } else {
     p = document.createElement('p')
-    p.innerHTML = 'SPACE TO START<br/>Arrows to turn'
+    p.innerHTML = 'SPACE TO START<br/>ARROWS to turn'
   }
   messageBox.appendChild(p)
 }
-
-setMessage()
 
 const drawBoardAndRing = () => {
   board.draw()
@@ -97,8 +96,8 @@ const setNewRing = () => {
 
   for (let piece of snake.pieces) {
     if (x === piece.x && y === piece.y) {
-      ringsEaten--
-      setNewRing()
+      [x, y] = getCoordinates()
+      break
     }
   }
 
@@ -131,17 +130,17 @@ const setScore = () => {
 }
 
 const increaseSpeedBar = () => {
-  speedBarLength += 2
-  if (ringsEaten && ringsEaten % 10 === 0) {
-    speedBar.style.width = `${speedBarLength}px`
+  if (ringsEaten % 10 === 0) {
+    speedBarLength += 9.7
+    speedBar.style.width = `${speedBarLength}%`
   }
 }
 
 const endGame = () => {
   showGameOver()
-  speedBarLength = 2
+  speedBarLength = 0
+  speedBar.style.width = '0%'
   ringsEaten = 0
-  speedBar.style.width = `${speedBarLength}px`
   clearInterval(loop)
   snake.draw()
   init()
@@ -188,9 +187,9 @@ const setWrapperRows = () => {
   const wrapper = document.querySelector('.wrapper')
   wrapper.style.width = `${wrapperWidth}px`
   if (isMobile) {
-    wrapper.style.gridTemplateRows = `${wrapperWidth}px 3rem auto`;
+    wrapper.style.gridTemplateRows = `${wrapperWidth}px 2rem auto`;
   } else {
-    wrapper.style.gridTemplateRows = `400px 3rem auto`;
+    wrapper.style.gridTemplateRows = `400px 2rem auto`;
   }
 }
 
