@@ -2,48 +2,46 @@
 <html lang="en">
   <head>
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Monoton&family=Press+Start+2P&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Monoton&family=Source+Code+Pro:wght@500;900&family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="manifest" href="/assets/site.webmanifest">
+    <link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#e4e1da">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" maximum-scale=1.0, user-scalable=0/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <title>Snake</title>
   </head>
   <body>
 
     <div class="wrapper">
-
-      <header>
-        <h1>SNAKE</h1>
-      </header>
-
-      <main>
+    
         <div class="modal">
-          <div class="message-box">
-            <h2></h2>
-          </div>
+            <h1>SNAKE</h1>
+            <div class="message-box">
+              <h2></h2>
+            </div>
         </div>
-        <div class="touch-pad">
-          <div class="up"></div>
-          <div class="right"></div>
-          <div class="down"></div>
-          <div class="left"></div>
-        </div>
-        <canvas id="canvas" width="400" height="400">
-          Your browser does not support canvas.<br />Please update or change to
-          another browser.
-        </canvas>
+     
+        <canvas id="canvas"></canvas>
 
-        <div class="score-speed-container">
+        <div class="score-container">
           <p class="score">Score:<span class="current-score">0</span></p>
-          <div class="speed-container">
-            <p class="speed">Speed:<div class="speed-meter"><div class="bar"></div></div></p>
-          </div>
+        </div>
+        <div class="speed-container">
+          <p class="speed">Speed:<div class="speed-meter"><div class="bar"></div></div></p>
         </div>
 
-      </main>
+        <div class="touch-pad">
+          <div class="up"><img src="./assets/button-up.svg" alt="Up button"></div>
+          <div class="right"><img src="./assets/button-right.svg" alt="Right button"></div>
+          <div class="down"><img src="./assets/button-down.svg" alt="Down button"></div>
+          <div class="left"><img src="./assets/button-left.svg" alt="Left button"></div>
+        </div>
 
       <script src="js/classes/board.js"></script>
       <script src="js/classes/ring.js"></script>

@@ -1,28 +1,25 @@
-const scoreHolder = document.querySelector('.current-score')
+const wrapperWidth = isMobile ? window.innerWidth - (window.innerWidth % 10) - 20 : 400
 const modal = document.querySelector('.modal')
+const messageBox = document.querySelector('.message-box')
+const scoreHolder = document.querySelector('.current-score')
+const speedBar = document.querySelector('.bar')
 const touchPad = document.querySelector('.touch-pad')
 const upField = document.querySelector('.up')
 const rightField = document.querySelector('.right')
 const downField = document.querySelector('.down')
 const leftField = document.querySelector('.left')
-const speedBar = document.querySelector('.bar')
-const messageBox = document.querySelector('.message-box')
-const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-  navigator.userAgent
-)
+
+let score = 0
+let addition = 1
+let ringsEaten = 0
 let speed = 10
 let speedBarLength = 2
-let score = 0
-let ringsEaten = 0
-let addition = 1
 let gameOn = false
 let death = false
 let snake, ring, loop
 let board = new Board('#333')
-board.draw()
 
 const init = () => {
-  console.log(isMobile)
   speed = 10
   gameOn = false
   ring = new Ring(100, 100)
@@ -31,7 +28,7 @@ const init = () => {
     10,
     '#fff',
     40,
-    380
+    300
   )
 
   toggleModal()
@@ -66,21 +63,17 @@ const gameLoop = () => {
 }
 
 const setMessage = () => {
-  let p1, p2
+  let p
 
   if (isMobile) {
-    p1 = document.createElement('p')
-    p1.innerHTML = 'TOUCH to start'
-    p2 = document.createElement('p')
-    p2.innerHTML = 'Use board sides to turn'
+    p = document.createElement('p')
+    p.innerHTML = '** TOUCH TO START **'
+
   } else {
-    p1 = document.createElement('p')
-    p1.innerHTML = 'SPACE to start'
-    p2 = document.createElement('p')
-    p2.innerHTML = 'Arrow keys to turn'
+    p = document.createElement('p')
+    p.innerHTML = 'SPACE TO START<br/>Arrows to turn'
   }
-  messageBox.appendChild(p1)
-  messageBox.appendChild(p2)
+  messageBox.appendChild(p)
 }
 
 setMessage()
@@ -114,9 +107,16 @@ const setNewRing = () => {
 }
 
 const getCoordinates = () => {
-  let x = Math.ceil(Math.random() * 370) + 10
+  let max
+  if (isMobile) {
+    max = wrapperWidth - 40
+  } else {
+    max = 360
+  }
+
+  let x = Math.ceil(Math.random() * max) + 20
   x -= x % 10
-  let y = Math.ceil(Math.random() * 370) + 10
+  let y = Math.ceil(Math.random() * max) + 20
   y -= y % 10
 
   return [x, y]
@@ -182,6 +182,16 @@ const setListeners = () => {
       snake.setDirection('left')
     }
   })
+}
+
+const setWrapperRows = () => {
+  const wrapper = document.querySelector('.wrapper')
+  wrapper.style.width = `${wrapperWidth}px`
+  if (isMobile) {
+    wrapper.style.gridTemplateRows = `${wrapperWidth}px 3rem auto`;
+  } else {
+    wrapper.style.gridTemplateRows = `400px 3rem auto`;
+  }
 }
 
 const startListener = e => {

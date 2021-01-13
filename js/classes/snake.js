@@ -110,8 +110,7 @@ class Snake {
   }
 
   checkCollision = () => {
-    if (this.x > 380 || this.y > 380 || this.x < 10 | this.y < 10) {
-
+    if (this.x > wrapperWidth - 20 || this.y > wrapperWidth - 20 || this.x < 10 | this.y < 10) {
       return true
     }
 

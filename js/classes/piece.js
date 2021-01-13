@@ -16,6 +16,8 @@ class Piece {
   }
 
   drawPiece() {
+    ctx.shadowColor = "#fff";
+    ctx.shadowBlur = 4;
     ctx.fillStyle = this.color
     ctx.fillRect(this.x, this.y, this.width, this.height)
   }
