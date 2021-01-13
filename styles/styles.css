@@ -124,7 +124,7 @@ h1 {
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(8, 1fr);
   margin-bottom: 6rem;
-  max-height: 12rem;
+  max-height: 10rem;
   z-index: 2;
 }
 
