@@ -1,13 +1,14 @@
-const wrapperWidth = isMobile ? window.innerWidth - (window.innerWidth % 10) - 20 : 400
+const body = document.querySelector('body')
 const modal = document.querySelector('.modal')
 const messageBox = document.querySelector('.message-box')
 const scoreHolder = document.querySelector('.current-score')
 const speedBar = document.querySelector('.bar')
 const touchPad = document.querySelector('.touch-pad')
-const upField = document.querySelector('.up')
-const rightField = document.querySelector('.right')
-const downField = document.querySelector('.down')
-const leftField = document.querySelector('.left')
+const upButton = document.querySelector('.up')
+const rightButton = document.querySelector('.right')
+const downButton = document.querySelector('.down')
+const leftButton = document.querySelector('.left')
+const wrapperWidth = isMobile ? window.innerWidth - (window.innerWidth % 10) - 20 : 400
 
 let score = 0
 let addition = 1
@@ -39,6 +40,7 @@ const start = () => {
   score = 0
   addition = 1
   scoreHolder.innerText = score
+  body.style.overflow = 'hidden'
   increaseSpeedBar()
   toggleModal()
   gameLoop()
@@ -138,6 +140,7 @@ const increaseSpeedBar = () => {
 
 const endGame = () => {
   showGameOver()
+  body.style.overflow = 'scroll'
   speedBarLength = 0
   speedBar.style.width = '0%'
   ringsEaten = 0
@@ -161,22 +164,26 @@ const setListeners = () => {
   window.addEventListener('keydown', directionListener)
   modal.addEventListener('touchstart', mobileStartListener)
 
-  upField.addEventListener('touchstart', () => {
+  upButton.addEventListener('touchstart', (e) => {
+    if (!gameOn) return
     if (snake.direction != 'down') {
       snake.setDirection('up')
     }
   })
-  rightField.addEventListener('touchstart', () => {
+  rightButton.addEventListener('touchstart', () => {
+    if (!gameOn) return
     if (snake.direction != 'left') {
       snake.setDirection('right')
     }
   })
-  downField.addEventListener('touchstart', () => {
+  downButton.addEventListener('touchstart', () => {
+    if (!gameOn) return
     if (snake.direction != 'up') {
       snake.setDirection('down')
     }
   })
-  leftField.addEventListener('touchstart', () => {
+  leftButton.addEventListener('touchstart', () => {
+    if (!gameOn) return
     if (snake.direction != 'right') {
       snake.setDirection('left')
     }
